@@ -1,6 +1,8 @@
 <template>
-  <router-view/>
+  <router-view></router-view>
 </template>
+
+
 
 <style lang="scss">
 #app {
@@ -24,3 +26,8 @@ nav {
   }
 }
 </style>
+<script>
+
+export default {
+}
+</script>
