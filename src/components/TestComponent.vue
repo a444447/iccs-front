@@ -1,0 +1,93 @@
+<template>
+<el-form label-width="80" :model="form" :inline="true">
+  <el-form-item label="Activity name">
+    <el-input v-model="form.name" />
+  </el-form-item>
+
+</el-form>
+  <template v-if="expandMore">
+    <el-form-item label="Activity zone">
+      <el-select v-model="form.region" placeholder="please select your zone">
+        <el-option label="Zone one" value="shanghai" />
+        <el-option label="Zone two" value="beijing" />
+      </el-select>
+    </el-form-item>
+    <el-form-item label="Activity time">
+      <el-col :span="11">
+        <el-date-picker
+            v-model="form.date1"
+            type="date"
+            placeholder="Pick a date"
+            style="width: 100%"
+        />
+      </el-col>
+      <el-col :span="2" class="text-center">
+        <span class="text-gray-500">-</span>
+      </el-col>
+      <el-col :span="11">
+        <el-time-picker
+            v-model="form.date2"
+            placeholder="Pick a time"
+            style="width: 100%"
+        />
+      </el-col>
+    </el-form-item>
+    <el-form-item label="Instant delivery">
+      <el-switch v-model="form.delivery" />
+    </el-form-item>
+    <el-form-item label="Activity type">
+      <el-checkbox-group v-model="form.type">
+        <el-checkbox label="Online activities" name="type" />
+        <el-checkbox label="Promotion activities" name="type" />
+        <el-checkbox label="Offline activities" name="type" />
+        <el-checkbox label="Simple brand exposure" name="type" />
+      </el-checkbox-group>
+    </el-form-item>
+    <el-form-item label="Resources">
+      <el-radio-group v-model="form.resource">
+        <el-radio label="Sponsor" />
+        <el-radio label="Venue" />
+      </el-radio-group>
+    </el-form-item>
+    <el-form-item label="Activity form">
+      <el-input v-model="form.desc" type="textarea" />
+    </el-form-item>
+  </template>
+  <el-form-item>
+    <el-button type="success" :icon="Check" circle />
+    <el-icon>
+      <Check/>
+    </el-icon>
+    <el-button type="success" plain>Reset</el-button>
+  </el-form-item>
+  <el-button :icon="expandMore ?'el-icon-arrow-up':'el-icon-arrow-down'" type="text" @click="expandMore =!expandMore">{{ expandMore ? '收起':'展开' }}</el-button>
+</template>
+
+
+
+<script>
+
+import {Check} from '@element-plus/icons-vue'
+export default {
+  data() {
+    return {
+      form: {
+        name: '',
+        region: '',
+        date1: '',
+        date2: '',
+        delivery: false,
+        type: [],
+        resource: '',
+        desc: '',
+      },
+      expandMore: false
+    }
+  },
+  methods: {
+
+  },
+  components:Check
+
+}
+</script>

@@ -21,10 +21,10 @@
               </template>
               <el-menu-item-group title="全国">
                 <el-menu-item index="1-1" @click="about">全国数据总览</el-menu-item>
-                <el-menu-item index="1-2">item one</el-menu-item>
+                <el-menu-item index="1-2" @click="mapPage">地区数据统计</el-menu-item>
               </el-menu-item-group>
               <el-menu-item-group title="Group Two">
-                <el-menu-item index="1-3">item three</el-menu-item>
+                <el-menu-item index="1-3" @click="search">查询</el-menu-item>
               </el-menu-item-group>
               <el-sub-menu index="1-4">
                 <template #title>item four</template>
@@ -32,7 +32,7 @@
               </el-sub-menu>
             </el-sub-menu>
             <el-menu-item index="2">
-              <el-icon><icon-menu /></el-icon>
+              <el-icon><Menu /></el-icon>
               <span>Navigator Two</span>
             </el-menu-item>
             <el-menu-item index="3" disabled>
@@ -78,6 +78,12 @@ export default {
       this.$router.push("/home/about")
 
       console.log(this.$route.fullPath)
+    },
+    search(){
+      this.$router.push("/home/test")
+    },
+    mapPage(){
+      this.$router.push("/home/barPageTest")
     }
   },
   components: {
