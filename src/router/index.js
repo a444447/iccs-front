@@ -4,7 +4,7 @@ import OneView from "@/views/OneView";
 import CardComponent from "@/components/CardComponent";
 import TestComponent from "@/components/TestComponent";
 //import TestComponent2 from "@/components/TestComponent2";
-import TestComponent3 from "@/components/TestComponent3";
+import TestComponent3 from "@/components/ManageUser";
 import TestComponent4 from "@/components/TestComponent4";
 import TestForChart from "@/components/TestForChart";
 import Banklogin from "@/views/Banklogin";

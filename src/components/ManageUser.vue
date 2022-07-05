@@ -3,16 +3,16 @@
     <h1>element-ui表格</h1>
     <el-row class="table-grid-content">
       <el-col :span="18" class="grid">
-        <el-input v-model="input" placeholder="请输入搜索内容"></el-input>
+        <el-input v-model="username" placeholder="请输入搜索内容"></el-input>
       </el-col>
       <el-col :span="3" class="grid" :gutter="1">
-        <el-button type="success" icon="el-icon-search">搜索</el-button>
+        <el-button type="success" icon="el-icon-search" @click="getUser(username)">搜索</el-button>
       </el-col>
       <el-col :span="2" class="grid" :gutter="15">
-        <el-button type="primary" @click="addGoods()">增加</el-button>
+        <el-button type="primary" @click="addUser()">增加</el-button>
       </el-col>
     </el-row>
-    <el-table :data="User2" style="width: 100%">
+    <el-table :data="UserTable" style="width: 100%">
       <el-table-column label="Date" width="180">
         <template #default="scope">
           <div style="display: flex; align-items: center">
@@ -25,11 +25,11 @@
         <template #default="scope">
           <el-popover effect="light" trigger="hover" placement="top" width="auto">
             <template #default>
-              <div>name: {{ scope.row.name }}</div>
-              <div>address: {{ scope.row.address }}</div>
+              <div>name: {{ scope.row.uName }}</div>
+              <div>address: {{ scope.row.uPassword }}</div>
             </template>
             <template #reference>
-              <el-tag>{{ scope.row.name }}</el-tag>
+              <el-tag>{{ scope.row.uName }}</el-tag>
             </template>
           </el-popover>
         </template>
@@ -45,7 +45,7 @@
       </el-table-column>
     </el-table>
   </div>
-  <p>{{User2}}</p>
+  <p>{{UserTable}}</p>
 </template>
 
 
@@ -78,7 +78,8 @@ export default {
           address: 'No. 189, Grove St, Los Angeles',
         },
       ],
-      User2: []
+      username: "",
+      UserTable: []
     }
   },
   Components: Timer,
@@ -89,17 +90,24 @@ export default {
     handleDelete(index, row){
       console.log(index, row)
     },
-    getUser() {
-      axios.post('/api/user/searchUser',{
-        studyNumber:'admin'
+    getUser(name) {
+      axios.post('/api/user/searchuser',{
+        uName:name
       }).then((response) => {
-        this.User2.push(response.data)
-        console.log(this.User2)
+        //this.User2.push(response.data)
+        this.UserTable = response.data["user"]
+        console.log(this.UserTable)
       })
-    }
+    },
+    addUser() {
+      
+    },
+    // searchUser() {
+    //   axios.post('/api/user/')
+    // }
   },
   mounted() {
-    this.getUser()
+    //this.getUser()
   }
 }
 </script>

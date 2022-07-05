@@ -14,7 +14,7 @@
         </div>
       </el-form-item>
       <el-input
-          v-model="text"
+          v-model="user.userName"
           maxlength="20"
           placeholder="用户名:"
           show-word-limit
@@ -22,14 +22,14 @@
       />
       <div style="margin: 30px 0" />
       <el-input
-          v-model="text"
+          v-model="user.userPassword"
           maxlength="20"
           placeholder="密码:"
           show-word-limit
           type="text"
       />
       <div style="margin: 30px 0" />
-      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:5px;" @click="Tohome">登录</el-button>
+      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:5px;" @click="doLogin">登录</el-button>
       <div style="margin: 30px 0" />
       <div>
         <router-link to="https://www.baidu.com/" >请联系我们</router-link>
@@ -41,11 +41,13 @@
 <script>
 
 
+import axios from "axios";
+
 export default {
   name: "BankLogin",
   data: function () {
     return {
-      id:0,
+      id: 0,
       imagebox:
           [
             {id: 0, idView: require('@/assets/imagebox/1.jpg')},
@@ -54,15 +56,36 @@ export default {
             {id: 3, idView: require('@/assets/imagebox/4.jpg')}
           ],
       image: {id: 0, idView: require('@/assets/imagebox/1.jpg')},
-      screenWidth: 0
+      screenWidth: 0,
+      user: {
+        userName: "",
+        userPassword: ""
+      }
     }
   },
-  methods:{
-    Tohome(){
-      this.$router.replace('/home')
-    },
-    getid(cons1){
-      console.log(cons1)
+  methods: {
+    doLogin() {
+      if (!this.user.userName) {
+        this.$message.error("请输入用户名!");
+        return
+      }
+      if (!this.user.userPassword) {
+        this.$message.error("请输入密码!");
+        return
+      } else {
+        axios.post("/api/user/login", {
+              uName: this.user.userName,
+              uPassword: this.user.userPassword
+            }
+        ).then(res => {
+          console.log(res.data)
+          if(res.data["code"] === 0) {
+            this.$router.push("/home")
+          }else{
+            alert("用户名或者密码错误")
+          }
+        })
+      }
     }
   }
 }

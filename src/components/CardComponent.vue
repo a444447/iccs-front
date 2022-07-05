@@ -1,8 +1,8 @@
 <template>
   <el-row>
     <el-col
-        v-for="(o, index) in 4"
-        :key="o"
+        v-for="(value, key, index) in 4"
+        :key="key"
         :span="5"
         :offset="index%3 > 0 ? 3 : 0"
     >
@@ -16,7 +16,7 @@
           <span>Yummy hamburger</span>
           <div class="bottom">
             <time class="time">{{ currentDate }}</time>
-            <el-button text class="button">Operating</el-button>
+            <el-button text @click="figure">Operating</el-button>
           </div>
         </div>
       </el-card>
@@ -29,6 +29,8 @@
 <script>
 
 
+import axios from "axios";
+
 export default {
   name: "CardComponent",
   data(){
@@ -39,10 +41,22 @@ export default {
     }
   },
   methods: {
-    back1() {
-      this.$router.push({
-        name:"home"
+    getData() {
+      axios.all([
+          axios.post("/api/",{Type: "gender"}),
+          axios.post("/api/",{Type: "age"}),
+          axios.post("/api/",{Type:"keep"}),
+          axios.post("/api/",{Type:"distribution"}),
+          axios.post("/api/",{Type:"payment"})
+      ]).then(res => {
+        console.log(res[0])
+        console.log(res[1])
       })
+
+    },
+
+    figure() {
+      this.$router.push("/home/barPageTest")
     }
   },
   mounted() {
