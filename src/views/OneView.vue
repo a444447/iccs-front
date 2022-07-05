@@ -83,7 +83,7 @@ export default {
       this.$router.push("/home/test")
     },
     mapPage(){
-      this.$router.push("/home/barPageTest")
+      this.$router.push("/home/mapPage")
     }
   },
   components: {

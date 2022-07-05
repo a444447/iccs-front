@@ -7,10 +7,18 @@ import TestComponent from "@/components/TestComponent";
 import TestComponent3 from "@/components/TestComponent3";
 import TestComponent4 from "@/components/TestComponent4";
 import TestForChart from "@/components/TestForChart";
+import Banklogin from "@/views/Banklogin";
+import CakeChartTest from "@/components/CakeChartTest";
+import DynamicLineChart from "@/components/LineChart";
 //import TestComponent from "@/components/TestComponent";
 //import AboutView from "@/views/OneView"
 // import HomeView from "@/views/HomeView";
 const routes = [
+  {
+    path: '/login',
+    name: 'login',
+    component: Banklogin,
+  },
   {
     path: '/home',
     name: 'home',
@@ -42,7 +50,7 @@ const routes = [
   },
   {
     path: '/',
-    redirect:'/home'
+    redirect:'/login'
   },
   // {
   //   path: '/about',
@@ -52,11 +60,16 @@ const routes = [
   //   // which is lazy-loaded when the route is visited.
   //   component:CardComponent
   // },
-  // {
-  //   path: '/test',
-  //   name:'test',
-  //   component: TestComponent
-  // },
+  {
+    path: '/CakeChartTest',
+    name:'CakeCharTest',
+    component: CakeChartTest
+  },
+  {
+    path: '/LineChart',
+    name:'LineChart',
+    component: DynamicLineChart
+  },
   {
     path: '/home/about',
     component: TestComponent

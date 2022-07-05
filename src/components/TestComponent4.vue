@@ -5,7 +5,7 @@
 <script>
 let Echarts = require('echarts/lib/echarts');
 require('echarts/lib/chart/bar'); //所需图表
-import "D:\\WebStormProject\\iccs-front\\src\\assets\\china.js";
+import "@/assets/china";
 export default {
   name: "TestComponent4",
   data() {
