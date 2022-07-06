@@ -1,5 +1,5 @@
 <template>
-  <div class="echart" id="mychart" :style="myChartStyle"></div>
+  <div class="echart" id="mychart" style="width: 100% ;height: 300%"></div>
 </template>
 
 <script>
@@ -12,7 +12,7 @@ export default {
       myChart: {},
       xData: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], //横坐标
       yData: [23, 24, 18, 25, 27, 28, 25], //人数数据
-      myChartStyle: { float: "left", width: "100%", height: "400px" } //图表样式
+      //myChartStyle: { float: "left", width: "100%", height: "400px" } //图表样式
     };
   },
   mounted() {

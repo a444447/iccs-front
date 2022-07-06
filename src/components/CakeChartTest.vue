@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div id="main" style="width:900px ;height:300px;"></div>
+    <div id="main" style="width: 100% ;height: 300%;"></div>
+    <p>{{option}}</p>
   </div>
 </template>
 
@@ -9,19 +10,24 @@ import echarts from 'echarts'
 export default {
   name: 'CakeChartTest',
   data() {
-    return {}
+    return {
+      colorBase: []
+    }
   },
   mounted: function() {
     this.$nextTick(function() {
       this.getPie()
     })
   },
+  props:["option"],
   methods: {
+
     getPie() {
       // 绘制图表
-      var myChart = echarts.init(document.getElementById('main'))
+      let myChart = echarts.init(document.getElementById('main'))
+      console.log(this.option.data[0]["0"])
       // 指定图表的配置项和数据
-      var option = {
+      let option = {
         //标题
         title: {
             text: 'bank数据',
@@ -37,7 +43,7 @@ export default {
         //鼠标划过时饼状图上显示的数据
         tooltip: {
           trigger: 'item',
-          formatter: '{a}<br/>{b}:{c} ({d}%)'
+          formatter: '123<br/>{b}:{c} ({d}%)'
         },
         //图例
         legend: {//图例  标注各种颜色代表的模块
@@ -50,21 +56,21 @@ export default {
             color: '#000',
             fontSize: 16
           },
-          data: ['bankdata1', 'bankdata2', 'bankdata3']//图例上显示的饼图各模块上的名字
+          data: this.option.title//图例上显示的饼图各模块上的名字
         },
         //饼图中各模块的颜色
-        color: ['#32dadd', '#b6a2de', '#5ab1ef'],
+        // color: ['#32dadd', '#b6a2de', '#5ab1ef'],
+        color: ['#32dadd', '#b6a2de'],
         // 饼图数据
         series: {
           // name: 'bug分布',
           type: 'pie',             //echarts图的类型   pie代表饼图
-          radius: '70%',           //饼图中饼状部分的大小所占整个父元素的百分比
+          radius: '75%',           //饼图中饼状部分的大小所占整个父元素的百分比
           center: ['50%', '50%'],  //整个饼图在整个父元素中的位置
           // data:''               //饼图数据
           data: [                  //每个模块的名字和值
-            { name: 'bankdata1', value: 10 }, //
-            { name: 'bankdata2', value: 30},
-            { name: 'bankdata3', value: 50 }
+            { name: this.option.title[0], value: this.option.data["0"]["0"] }, //
+            { name: this.option.title[1], value: this.option.data["0"]["1"]}
           ],
           itemStyle: {
             normal: {

@@ -36,7 +36,7 @@
       </el-col>
     </el-row>
     <el-table :data="UserTable" style="width: 100%">
-      <el-table-column label="Date" width="180">
+      <el-table-column label="ID" width="180">
         <template #default="scope">
           <div style="display: flex; align-items: center">
             <el-icon><Timer /></el-icon>
@@ -44,7 +44,7 @@
           </div>
         </template>
       </el-table-column>
-      <el-table-column label="Name" width="180">
+      <el-table-column label="Name" width="240">
         <template #default="scope">
           <el-popover effect="light" trigger="hover" placement="top" width="auto">
             <template #default>
@@ -173,6 +173,10 @@ export default {
           this.$message.success('删除用户成功！')
         }
       })
+      console.log(this.username)
+      this.getUser(this.username)
+
+
     },
     getUser(name) {
       axios.post('/api/user/searchuser',{

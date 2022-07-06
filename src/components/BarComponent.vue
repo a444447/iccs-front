@@ -1,5 +1,5 @@
 <template>
-<div style="width: 100% ;height: 50%" ref="bar">
+<div style="width: 100% ;height: 300%" ref="bar">
 
   <p>{{option}}</p>
 </div>
@@ -30,19 +30,6 @@ export default {
     this.init()
     console.log(this.option)
   }
-  // setup(props) {
-  //   let xAxis = ref(props.xAxis)
-  //   let yAxis = ref(props.yAxis)
-  //   let series = ref(props.series)
-  //   let Option = {
-  //     xAxis:xAxis,
-  //     yAxis:yAxis,
-  //     series:series
-  //   }
-  //   return {
-  //     Option
-  //   }
-  // }
 
 
 }

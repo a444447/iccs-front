@@ -31,23 +31,6 @@ export default {
     }
   }
 
-  // setup() {
-  //   let xAxis = ref({
-  //     data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-  //   });
-  //   let yAxis = ref({});
-  //   let series = ref([
-  //     {
-  //       type: 'bar',
-  //       data: [23, 24, 18, 25, 27, 28, 25]
-  //     }
-  //   ])
-  //   return {
-  //     xAxis,
-  //     yAxis,
-  //     series
-  //   }
-  // }
 }
 </script>
 
