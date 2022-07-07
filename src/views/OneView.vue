@@ -99,7 +99,7 @@ export default {
 
 <style scoped>
 .iconBlock {
-  background: aqua;
+  background: #545c64;
 }
 .dropMenu {
   background: aquamarine;

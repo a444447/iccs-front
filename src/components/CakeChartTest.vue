@@ -1,31 +1,98 @@
 <template>
   <div>
-    <div id="main" style="width: 100% ;height: 300%;"></div>
-    <p>{{option}}</p>
+    <div :style="ChartStyle1"></div>
+<!--    <p>{{optionForPie}}</p>-->
+<!--    <div :style="ChartStyle1" class="test">-->
+<!--      <p>123</p>-->
+<!--    </div>-->
   </div>
 </template>
 
 <script>
-import echarts from 'echarts'
+//import echarts from 'echarts'
+import axios from "axios";
+import Echarts from "echarts/lib/echarts";
 export default {
   name: 'CakeChartTest',
   data() {
     return {
-      colorBase: []
+        title:[],
+        graphData:[],
+      colorBase: [],
+      r:'65%',
+      ChartStyle: {
+        width: 100 ,
+        height: 300
+      },
+      ChartStyle1: {
+        width: '100%' ,
+        height: '100%'
+      }
     }
   },
   mounted: function() {
-    this.$nextTick(function() {
-      this.getPie()
-    })
+    // this.$nextTick(function() {
+    //   this.getData()
+    // })
+    this.getdata2()
   },
-  props:["option"],
+  props:["url","day", "InputStyle","divId"],
   methods: {
 
+      getdata2(){
+          axios.post(this.url,{
+              days:this.day
+          }).then(res=>{
+              this.title = res.data['title']
+              for (let datum of res.data['data']) {
+
+                  for (let i = 0;i<datum.length;i++) {
+                      let tmp = {
+                          name:null,
+                          value:null
+                      }
+                      tmp.name=res.data['title'][i]
+                      console.log(datum[i])
+                      tmp.value=datum[i]
+                      console.log(tmp)
+                      this.graphData.push(tmp)
+                  }
+              }
+              console.log(this.title)
+              console.log(this.graphData)
+              if(this.InputStyle){
+                  this.ChartStyle = this.InputStyle
+              }
+              this.getPie()
+          })
+      },
+    //async缺少
+    // getData(){
+    //   axios.post(this.url,{
+    //     days:this.day
+    //   }).then(res => {
+    //       console.log(res)
+    //     let tempData = {
+    //       title: res.data["title"],
+    //       data: res.data["data"]
+    //     }
+    //     this.optionForPie = tempData
+    //     //this.optionSet.push(tempData)
+    //     console.log(res["data"])
+    //     if(this.InputStyle){
+    //       this.ChartStyle = this.InputStyle
+    //     }
+    //     console.log(this.ChartStyle)
+    //     this.getPie()
+    //   })
+    // },
     getPie() {
       // 绘制图表
-      let myChart = echarts.init(document.getElementById('main'))
-      console.log(this.option.data[0]["0"])
+      let myChart = Echarts.init(document.getElementById(this.divId),
+          (null),
+          this.ChartStyle
+
+      )
       // 指定图表的配置项和数据
       let option = {
         //标题
@@ -56,22 +123,22 @@ export default {
             color: '#000',
             fontSize: 16
           },
-          data: this.option.title//图例上显示的饼图各模块上的名字
+          data: this.title//图例上显示的饼图各模块上的名字
         },
         //饼图中各模块的颜色
         // color: ['#32dadd', '#b6a2de', '#5ab1ef'],
-        color: ['#32dadd', '#b6a2de'],
+        color: ['#32dadd', '#b6a2de','#32db32','#d94a4a'],
         // 饼图数据
         series: {
           // name: 'bug分布',
           type: 'pie',             //echarts图的类型   pie代表饼图
-          radius: '75%',           //饼图中饼状部分的大小所占整个父元素的百分比
+          radius: this.r,           //饼图中饼状部分的大小所占整个父元素的百分比
           center: ['50%', '50%'],  //整个饼图在整个父元素中的位置
-          // data:''               //饼图数据
-          data: [                  //每个模块的名字和值
-            { name: this.option.title[0], value: this.option.data["0"]["0"] }, //
-            { name: this.option.title[1], value: this.option.data["0"]["1"]}
-          ],
+          data:this.graphData,              //饼图数据
+          // data: [                  //每个模块的名字和值
+          //   { name: this.optionForPie.title[0], value: this.optionForPie.data["0"]["0"] }, //
+          //   { name: this.optionForPie.title[1], value: this.optionForPie.data["0"]["1"]}
+          // ],
           itemStyle: {
             normal: {
               label: {
@@ -96,6 +163,8 @@ export default {
 </script>
 
 <style scoped>
-
+.test{
+  background: #42b983;
+}
 </style>
 

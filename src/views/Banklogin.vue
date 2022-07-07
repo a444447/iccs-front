@@ -27,6 +27,7 @@
           placeholder="密码:"
           show-word-limit
           type="text"
+          show-password
       />
       <div style="margin: 30px 0" />
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:5px;" @click="doLogin">登录</el-button>
